@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Multimedia</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>HTML Tag Review</h1>
+    <p>Multimedia</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="metadata.html">Metadata</a>
+    <a href="text.html">Text</a>
+    <a href="links.html">Links</a>
+    <a href="lists.html">Lists</a>
+    <a href="tables.html">Tables</a>
+    <a href="forms.html">Forms</a>
+    <a href="media.html">Media</a>
+    <a href="semantic.html">Semantic</a>
+</nav>
+
+<main>
+
+    <h2>Multimedia Tags</h2>
+
+    <!-- VIDEO -->
+
+    <section>
+        <h2>&lt;video&gt;</h2>
+
+        <h3>Definition</h3>
+        <p>
+            The &lt;video&gt; tag is used to display video content
+            on a web page.
+        </p>
+
+        <h3>Attributes</h3>
+
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>src</td>
+                <td>Specifies the video file.</td>
+            </tr>
+            <tr>
+                <td>controls</td>
+                <td>Displays video controls.</td>
+            </tr>
+            <tr>
+                <td>width</td>
+                <td>Sets the video width.</td>
+            </tr>
+        </table>
+
+        <h3>Example (code)</h3>
+
+        <pre><code>&lt;video src="images/video.mp4" controls width="400"&gt;
+&lt;/video&gt;</code></pre>
+
+        <h3>Example (result)</h3>
+
+        <div class="example-result">
+            <video controls width="400">
+                <source src="images/video.mp4" type="video/mp4">
+                Your browser does not support video.
+            </video>
+        </div>
+    </section>
+
+    <!-- AUDIO -->
+
+    <section>
+        <h2>&lt;audio&gt;</h2>
+
+        <h3>Definition</h3>
+        <p>
+            The &lt;audio&gt; tag is used to play audio files
+            on a web page.
+        </p>
+
+        <h3>Attributes</h3>
+
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>src</td>
+                <td>Specifies the audio file.</td>
+            </tr>
+            <tr>
+                <td>controls</td>
+                <td>Displays audio controls.</td>
+            </tr>
+            <tr>
+                <td>autoplay</td>
+                <td>Attempts to play the audio automatically.</td>
+            </tr>
+        </table>
+
+        <h3>Example (code)</h3>
+
+        <pre><code>&lt;audio src="images/audio.mp3" controls&gt;
+&lt;/audio&gt;</code></pre>
+
+        <h3>Example (result)</h3>
+
+        <div class="example-result">
+            <audio controls>
+                <source src="images/audio.mp3" type="audio/mpeg">
+                Your browser does not support audio.
+            </audio>
+        </div>
+    </section>
+
+    <!-- SOURCE -->
+
+    <section>
+        <h2>&lt;source&gt;</h2>
+
+        <h3>Definition</h3>
+        <p>
+            The &lt;source&gt; tag specifies different media files
+            for elements such as video and audio.
+        </p>
+
+        <h3>Attributes</h3>
+
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>src</td>
+                <td>Specifies the media file.</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>Specifies the media type.</td>
+            </tr>
+        </table>
+
+        <h3>Example (code)</h3>
+
+        <pre><code>&lt;video controls&gt;
+    &lt;source src="images/video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;</code></pre>
+
+        <h3>Example (result)</h3>
+
+        <div class="example-result">
+            The browser selects the compatible video source.
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>HTML Tag Review Project</p>
+</footer>
+
+</body>
+</html>
