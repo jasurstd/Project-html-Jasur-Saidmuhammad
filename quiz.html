@@ -12,13 +12,37 @@
 
 
 </head>
-     <script src="js/site.js"></script>
+
 <body>
 
-<header>
-    <h1>HTML Tag Review Quiz</h1>
-    <p>Test your knowledge of HTML tags.</p>
+<header class="site-header">
+    <div class="header-bg" aria-hidden="true">
+        <span>&lt;/&gt;</span><span>&lt;p&gt;</span><span>&lt;a&gt;</span>
+        <span>&lt;h1&gt;</span><span>&lt;div&gt;</span><span>&lt;ul&gt;</span>
+    </div>
+    <div class="header-inner">
+        <h1>HTML Tag Review Quiz</h1>
+        <p>Test your knowledge of HTML tags.</p>
+    </div>
 </header>
+
+<nav class="site-nav" aria-label="Main navigation">
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">
+        <span class="bars"><i></i></span>Menu
+    </button>
+    <div class="nav-links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="text.html">Text</a>
+        <a href="links.html">Links</a>
+        <a href="lists.html">Lists</a>
+        <a href="tables.html">Tables</a>
+        <a href="forms.html">Forms</a>
+        <a href="media.html">Media</a>
+        <a href="semantic.html">Semantic</a>
+        <a href="metadata.html">Metadata</a>
+        <a href="quiz.html">Quiz</a>
+    </div>
+</nav>
 
 <main>
 
@@ -26,11 +50,27 @@
 
     <div id="quiz">
 
-        <h2 id="question">Question goes here</h2>
+        <!-- progress -->
+        <div class="quiz-top">
+            <div class="quiz-count">
+                <span id="progressText">Question 1 of 8</span>
+                <span id="answeredText">Answered: 0</span>
+            </div>
+            <div class="quiz-bar"><div class="quiz-bar-fill" id="progressFill"></div></div>
+            <div class="quiz-dots" id="dots"></div>
+        </div>
 
-        <div id="answers"></div>
+        <!-- question + answers (this card slides left/right) -->
+        <div id="questionCard">
+            <h2 id="question">Question goes here</h2>
+            <div id="answers"></div>
+        </div>
 
-        <button id="nextButton">Next Question</button>
+        <!-- back / next -->
+        <div class="quiz-controls">
+            <button id="backButton" type="button">&larr; Back</button>
+            <button id="nextButton" type="button">Next &rarr;</button>
+        </div>
 
     </div>
 
@@ -38,7 +78,8 @@
         <h2>Quiz Complete!</h2>
         <p id="score"></p>
 
-        <button id="restartButton">Try Again</button>
+        <button id="reviewButton" type="button">Review Answers</button>
+        <button id="restartButton" type="button">Try Again</button>
     </div>
 
 </section>
@@ -46,10 +87,25 @@
 
 </main>
 
-<footer>
-    <p>&copy; 2026 Jasur &amp; Saidhummad. All Rights Reserved.</p>
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <strong>HTML Tag Review</strong>
+            <p>A simple guide to the main HTML tags, with definitions, attributes and live examples.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Quick links</h4>
+            <a href="index.html">Home</a>
+            <a href="semantic.html">Semantic tags</a>
+            <a href="quiz.html">Take the quiz</a>
+        </div>
+        <a href="#" class="to-top">&uarr; Back to top</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Jasur &amp; Saidhummad. All Rights Reserved.</p>
 </footer>
-   
+
+<script src="js/site.js"></script>
+
 <script>
 
 const questions = [
@@ -136,139 +192,258 @@ const questions = [
 
 
 const questionElement = document.getElementById("question");
-const answerButtons = document.getElementById("answers");
+const answerButtons   = document.getElementById("answers");
+const questionCard    = document.getElementById("questionCard");
+
+const backButton = document.getElementById("backButton");
 const nextButton = document.getElementById("nextButton");
 
-const quizElement = document.getElementById("quiz");
+const quizElement   = document.getElementById("quiz");
 const resultElement = document.getElementById("result");
+const scoreElement  = document.getElementById("score");
 
-const scoreElement = document.getElementById("score");
 const restartButton = document.getElementById("restartButton");
+const reviewButton  = document.getElementById("reviewButton");
+
+const progressText  = document.getElementById("progressText");
+const answeredText  = document.getElementById("answeredText");
+const progressFill  = document.getElementById("progressFill");
+const dotsContainer = document.getElementById("dots");
 
 
 let currentQuestion = 0;
-let score = 0;
+
+// userAnswers[i] = index of the answer chosen for question i (null = not answered yet)
+let userAnswers = [];
 
 
 function startQuiz() {
 
     currentQuestion = 0;
-    score = 0;
+    userAnswers = new Array(questions.length).fill(null);
 
     resultElement.style.display = "none";
     quizElement.style.display = "block";
 
-    showQuestion();
+    buildDots();
+    showQuestion("none");
 }
 
 
-function showQuestion() {
-
-    resetAnswers();
+/* direction = "forward" | "back" | "none"  -> decides which way the card slides */
+function showQuestion(direction) {
 
     const question = questions[currentQuestion];
 
     questionElement.textContent =
         `${currentQuestion + 1}. ${question.question}`;
 
+    answerButtons.innerHTML = "";
 
-    question.answers.forEach(answer => {
+    question.answers.forEach((answer, index) => {
 
         const button = document.createElement("button");
 
         button.textContent = answer.text;
-
         button.classList.add("answer-button");
-
-        if (answer.correct) {
-            button.dataset.correct = "true";
-        }
-
-        button.addEventListener("click", selectAnswer);
+        button.addEventListener("click", () => selectAnswer(index));
 
         answerButtons.appendChild(button);
-
     });
-}
 
-
-function resetAnswers() {
-
-    answerButtons.innerHTML = "";
-
-    nextButton.style.display = "none";
-}
-
-
-function selectAnswer(event) {
-
-    const selectedButton = event.target;
-
-    const correct =
-        selectedButton.dataset.correct === "true";
-
-
-    if (correct) {
-
-        selectedButton.classList.add("correct");
-
-        score++;
-
-    } else {
-
-        selectedButton.classList.add("wrong");
-
+    // If this question was already answered, show the old answer (locked)
+    if (userAnswers[currentQuestion] !== null) {
+        lockAnswers(userAnswers[currentQuestion]);
     }
 
+    updateControls();
+    playSlide(direction);
+}
 
-    Array.from(answerButtons.children).forEach(button => {
 
-        if (button.dataset.correct === "true") {
+function playSlide(direction) {
 
-            button.classList.add("correct");
+    questionCard.classList.remove("slide-forward", "slide-back");
 
-        }
+    if (direction === "none") return;
+
+    void questionCard.offsetWidth;   // restart the animation
+
+    questionCard.classList.add(
+        direction === "forward" ? "slide-forward" : "slide-back"
+    );
+}
+
+
+function selectAnswer(index) {
+
+    // can't change an answer once it is chosen
+    if (userAnswers[currentQuestion] !== null) return;
+
+    userAnswers[currentQuestion] = index;
+
+    lockAnswers(index);
+    updateControls();
+}
+
+
+function lockAnswers(chosenIndex) {
+
+    const question = questions[currentQuestion];
+
+    Array.from(answerButtons.children).forEach((button, i) => {
 
         button.disabled = true;
 
+        if (question.answers[i].correct) {
+            button.classList.add("correct");
+        } else if (i === chosenIndex) {
+            button.classList.add("wrong");
+        }
+
+        if (i === chosenIndex) {
+            button.classList.add("selected");
+        }
     });
+}
 
 
-    nextButton.style.display = "block";
+function updateControls() {
+
+    const answeredCount = userAnswers.filter(a => a !== null).length;
+    const isLast = currentQuestion === questions.length - 1;
+
+    // Back: disabled on the first question
+    backButton.disabled = currentQuestion === 0;
+
+    // Next: only after this question has an answer
+    nextButton.disabled = userAnswers[currentQuestion] === null;
+    nextButton.textContent = isLast ? "Finish Quiz \u2713" : "Next \u2192";
+
+    // Progress
+    progressText.textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+    answeredText.textContent = `Answered: ${answeredCount}`;
+    progressFill.style.width =
+        `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+    updateDots();
+}
+
+
+/* ---------- numbered dots: jump to any question you can reach ---------- */
+
+function buildDots() {
+
+    dotsContainer.innerHTML = "";
+
+    questions.forEach((q, i) => {
+
+        const dot = document.createElement("button");
+
+        dot.type = "button";
+        dot.className = "quiz-dot";
+        dot.textContent = i + 1;
+        dot.setAttribute("aria-label", `Go to question ${i + 1}`);
+        dot.addEventListener("click", () => goToQuestion(i));
+
+        dotsContainer.appendChild(dot);
+    });
+}
+
+
+function updateDots() {
+
+    const firstUnanswered = userAnswers.indexOf(null);
+    const reachable = firstUnanswered === -1 ? questions.length : firstUnanswered;
+
+    Array.from(dotsContainer.children).forEach((dot, i) => {
+
+        dot.classList.toggle("answered", userAnswers[i] !== null);
+        dot.classList.toggle("current", i === currentQuestion);
+
+        // you can go back to any answered question, or the next unanswered one
+        dot.disabled = i > reachable;
+    });
+}
+
+
+function goToQuestion(index) {
+
+    if (index === currentQuestion) return;
+
+    const direction = index > currentQuestion ? "forward" : "back";
+
+    currentQuestion = index;
+    showQuestion(direction);
+}
+
+
+/* ---------- back / next ---------- */
+
+function showPreviousQuestion() {
+
+    if (currentQuestion === 0) return;
+
+    currentQuestion--;
+    showQuestion("back");
 }
 
 
 function showNextQuestion() {
 
-    currentQuestion++;
+    if (userAnswers[currentQuestion] === null) return;
 
-    if (currentQuestion < questions.length) {
+    if (currentQuestion < questions.length - 1) {
 
-        showQuestion();
+        currentQuestion++;
+        showQuestion("forward");
 
     } else {
 
         showResult();
-
     }
 }
 
 
 function showResult() {
 
-    quizElement.style.display = "none";
+    const score = userAnswers.filter((chosen, i) =>
+        chosen !== null && questions[i].answers[chosen].correct
+    ).length;
 
+    quizElement.style.display = "none";
     resultElement.style.display = "block";
 
     scoreElement.textContent =
         `Your score: ${score} / ${questions.length}`;
-
 }
 
 
-nextButton.addEventListener("click", showNextQuestion);
+function reviewAnswers() {
 
+    currentQuestion = 0;
+
+    resultElement.style.display = "none";
+    quizElement.style.display = "block";
+
+    showQuestion("back");
+}
+
+
+backButton.addEventListener("click", showPreviousQuestion);
+nextButton.addEventListener("click", showNextQuestion);
 restartButton.addEventListener("click", startQuiz);
+reviewButton.addEventListener("click", reviewAnswers);
+
+// Arrow keys also move between questions
+document.addEventListener("keydown", event => {
+
+    if (quizElement.style.display === "none") return;
+
+    if (event.key === "ArrowLeft")  showPreviousQuestion();
+    if (event.key === "ArrowRight") showNextQuestion();
+});
 
 
 startQuiz();
