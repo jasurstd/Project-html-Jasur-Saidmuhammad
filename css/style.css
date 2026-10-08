@@ -1,0 +1,161 @@
+/* Basic page settings */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #222;
+}
+
+
+/* Header */
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+
+/* Navigation */
+
+nav {
+    background-color: #444;
+    padding: 12px;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+/* Main content */
+
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+
+/* Sections */
+
+section {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+section h2 {
+    color: #333;
+}
+
+
+/* Tables */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    border: 1px solid #aaa;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #eee;
+}
+
+
+/* Code examples */
+
+pre {
+    background-color: #eee;
+    padding: 15px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: Consolas, monospace;
+}
+
+
+/* Real examples */
+
+.example-result {
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #fafafa;
+}
+
+
+/* Forms */
+
+input {
+    padding: 7px;
+    margin: 5px;
+}
+
+button {
+    padding: 7px 12px;
+}
+
+
+/* Small examples used on semantic page */
+
+.small-header {
+    background-color: #ddd;
+    color: #222;
+    padding: 10px;
+}
+
+.small-header h1 {
+    font-size: 24px;
+}
+
+.example-nav {
+    background-color: #eee;
+    justify-content: flex-start;
+}
+
+.example-nav a {
+    color: #222;
+}
+
+.small-footer {
+    background-color: #ddd;
+    color: #222;
+    padding: 10px;
+}
+
+
+/* Footer */
+
+body > footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
