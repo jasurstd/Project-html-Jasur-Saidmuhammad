@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Forms</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>HTML Tag Review</h1>
+    <p>Forms</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="metadata.html">Metadata</a>
+    <a href="text.html">Text</a>
+    <a href="links.html">Links</a>
+    <a href="lists.html">Lists</a>
+    <a href="tables.html">Tables</a>
+    <a href="forms.html">Forms</a>
+    <a href="media.html">Media</a>
+    <a href="semantic.html">Semantic</a>
+</nav>
+
+<main>
+
+    <h2>HTML Forms</h2>
+
+    <!-- FORM -->
+
+    <section>
+        <h2>&lt;form&gt;</h2>
+
+        <h3>Definition</h3>
+        <p>
+            The &lt;form&gt; tag creates a form that can be used
+            to collect information from users.
+        </p>
+
+        <h3>Attributes</h3>
+
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>action</td>
+                <td>Specifies where form data is sent.</td>
+            </tr>
+            <tr>
+                <td>method</td>
+                <td>Specifies how the form data is sent.</td>
+            </tr>
+        </table>
+
+        <h3>Example (code)</h3>
+
+        <pre><code>&lt;form action="/submit" method="post"&gt;
+    ...
+&lt;/form&gt;</code></pre>
+
+        <h3>Example (result)</h3>
+
+        <div class="example-result">
+            <form>
+                <label>Name:</label>
+                <input type="text">
+            </form>
+        </div>
+    </section>
+
+    <!-- INPUT -->
+
+    <section>
+        <h2>&lt;input&gt;</h2>
+
+        <h3>Definition</h3>
+        <p>
+            The &lt;input&gt; tag creates an input field where
+            users can enter or select information.
+        </p>
+
+        <h3>Attributes</h3>
+
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>Defines the type of input field.</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>Gives the input a name.</td>
+            </tr>
+            <tr>
+                <td>placeholder</td>
+                <td>Displays a short hint inside the input.</td>
+            </tr>
+        </table>
+
+        <h3>Example (code)</h3>
+
+        <pre><code>&lt;input type="text" placeholder="Enter your name"&gt;</code></pre>
+
+        <h3>Example (result)</h3>
+
+        <div class="example-result">
+            <input type="text" placeholder="Enter your name">
+        </div>
+    </section>
+
+    <!-- BUTTON -->
+
+    <section>
+        <h2>&lt;button&gt;</h2>
+
+        <h3>Definition</h3>
+        <p>
+            The &lt;button&gt; tag creates a clickable button.
+        </p>
+
+        <h3>Attributes</h3>
+
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>Defines the type of button.</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>Gives the button a name.</td>
+            </tr>
+            <tr>
+                <td>value</td>
+                <td>Specifies a value for the button.</td>
+            </tr>
+        </table>
+
+        <h3>Example (code)</h3>
+
+        <pre><code>&lt;button type="button"&gt;Click Me&lt;/button&gt;</code></pre>
+
+        <h3>Example (result)</h3>
+
+        <div class="example-result">
+            <button type="button">Click Me</button>
+        </div>
+    </section>
+
+    <!-- LABEL -->
+
+    <section>
+        <h2>&lt;label&gt;</h2>
+
+        <h3>Definition</h3>
+        <p>
+            The &lt;label&gt; tag provides a text label for a form control.
+        </p>
+
+        <h3>Attributes</h3>
+
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>for</td>
+                <td>Connects the label to a form input.</td>
+            </tr>
+        </table>
+
+        <h3>Example (code)</h3>
+
+        <pre><code>&lt;label for="email"&gt;Email:&lt;/label&gt;
+&lt;input type="email" id="email"&gt;</code></pre>
+
+        <h3>Example (result)</h3>
+
+        <div class="example-result">
+            <label for="email-example">Email:</label>
+            <input type="email" id="email-example">
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>HTML Tag Review Project</p>
+</footer>
+
+</body>
+</html>
