@@ -159,3 +159,63 @@ body > footer {
     padding: 15px;
     margin-top: 30px;
 }
+
+/* =========================
+   QUIZ
+   ========================= */
+
+.quiz-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+#answers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.answer-button {
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+}
+
+.answer-button:hover {
+    background-color: #f0f0f0;
+}
+
+.answer-button.correct {
+    background-color: #c8f7c5;
+    border-color: green;
+}
+
+.answer-button.wrong {
+    background-color: #ffc7c7;
+    border-color: red;
+}
+
+.answer-button:disabled {
+    cursor: not-allowed;
+}
+
+#nextButton,
+#restartButton {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.quiz-result {
+    display: none;
+    text-align: center;
+}

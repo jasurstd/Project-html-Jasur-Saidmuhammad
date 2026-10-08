@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>HTML Quiz</title>
+
+<link rel="stylesheet" href="css/style.css">
+```
+
+</head>
+
+<body>
+
+<header>
+    <h1>HTML Quiz</h1>
+    <p>Test your knowledge of HTML tags.</p>
+</header>
+
+<main>
+
+```
+<section class="quiz-container">
+
+    <div id="quiz">
+
+        <h2 id="question">Question goes here</h2>
+
+        <div id="answers"></div>
+
+        <button id="nextButton">Next Question</button>
+
+    </div>
+
+    <div id="result" class="quiz-result">
+        <h2>Quiz Complete!</h2>
+        <p id="score"></p>
+
+        <button id="restartButton">Try Again</button>
+    </div>
+
+</section>
+```
+
+</main>
+
+<footer>
+    <p>HTML Tag Review Website</p>
+</footer>
+
+<script>
+
+const questions = [
+    {
+        question: "Which HTML tag is used for the largest heading?",
+        answers: [
+            { text: "<h1>", correct: true },
+            { text: "<heading>", correct: false },
+            { text: "<head>", correct: false },
+            { text: "<h6>", correct: false }
+        ]
+    },
+
+    {
+        question: "Which tag is used to create a paragraph?",
+        answers: [
+            { text: "<paragraph>", correct: false },
+            { text: "<p>", correct: true },
+            { text: "<text>", correct: false },
+            { text: "<para>", correct: false }
+        ]
+    },
+
+    {
+        question: "Which HTML tag creates a hyperlink?",
+        answers: [
+            { text: "<link>", correct: false },
+            { text: "<href>", correct: false },
+            { text: "<a>", correct: true },
+            { text: "<url>", correct: false }
+        ]
+    },
+
+    {
+        question: "Which tag is used to display an image?",
+        answers: [
+            { text: "<image>", correct: false },
+            { text: "<img>", correct: true },
+            { text: "<picture>", correct: false },
+            { text: "<src>", correct: false }
+        ]
+    },
+
+    {
+        question: "Which tag creates an unordered list?",
+        answers: [
+            { text: "<ol>", correct: false },
+            { text: "<list>", correct: false },
+            { text: "<ul>", correct: true },
+            { text: "<li>", correct: false }
+        ]
+    },
+
+    {
+        question: "Which tag creates a table row?",
+        answers: [
+            { text: "<td>", correct: false },
+            { text: "<tr>", correct: true },
+            { text: "<th>", correct: false },
+            { text: "<row>", correct: false }
+        ]
+    },
+
+    {
+        question: "Which tag is used to create a form?",
+        answers: [
+            { text: "<input>", correct: false },
+            { text: "<form>", correct: true },
+            { text: "<fieldset>", correct: false },
+            { text: "<data>", correct: false }
+        ]
+    },
+
+    {
+        question: "Which HTML element contains the visible content of a webpage?",
+        answers: [
+            { text: "<head>", correct: false },
+            { text: "<html>", correct: false },
+            { text: "<body>", correct: true },
+            { text: "<mainpage>", correct: false }
+        ]
+    }
+];
+
+
+const questionElement = document.getElementById("question");
+const answerButtons = document.getElementById("answers");
+const nextButton = document.getElementById("nextButton");
+
+const quizElement = document.getElementById("quiz");
+const resultElement = document.getElementById("result");
+
+const scoreElement = document.getElementById("score");
+const restartButton = document.getElementById("restartButton");
+
+
+let currentQuestion = 0;
+let score = 0;
+
+
+function startQuiz() {
+
+    currentQuestion = 0;
+    score = 0;
+
+    resultElement.style.display = "none";
+    quizElement.style.display = "block";
+
+    showQuestion();
+}
+
+
+function showQuestion() {
+
+    resetAnswers();
+
+    const question = questions[currentQuestion];
+
+    questionElement.textContent =
+        `${currentQuestion + 1}. ${question.question}`;
+
+
+    question.answers.forEach(answer => {
+
+        const button = document.createElement("button");
+
+        button.textContent = answer.text;
+
+        button.classList.add("answer-button");
+
+        if (answer.correct) {
+            button.dataset.correct = "true";
+        }
+
+        button.addEventListener("click", selectAnswer);
+
+        answerButtons.appendChild(button);
+
+    });
+}
+
+
+function resetAnswers() {
+
+    answerButtons.innerHTML = "";
+
+    nextButton.style.display = "none";
+}
+
+
+function selectAnswer(event) {
+
+    const selectedButton = event.target;
+
+    const correct =
+        selectedButton.dataset.correct === "true";
+
+
+    if (correct) {
+
+        selectedButton.classList.add("correct");
+
+        score++;
+
+    } else {
+
+        selectedButton.classList.add("wrong");
+
+    }
+
+
+    Array.from(answerButtons.children).forEach(button => {
+
+        if (button.dataset.correct === "true") {
+
+            button.classList.add("correct");
+
+        }
+
+        button.disabled = true;
+
+    });
+
+
+    nextButton.style.display = "block";
+}
+
+
+function showNextQuestion() {
+
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+
+        showQuestion();
+
+    } else {
+
+        showResult();
+
+    }
+}
+
+
+function showResult() {
+
+    quizElement.style.display = "none";
+
+    resultElement.style.display = "block";
+
+    scoreElement.textContent =
+        `Your score: ${score} / ${questions.length}`;
+
+}
+
+
+nextButton.addEventListener("click", showNextQuestion);
+
+restartButton.addEventListener("click", startQuiz);
+
+
+startQuiz();
+
+</script>
+
+</body>
+
+</html>
